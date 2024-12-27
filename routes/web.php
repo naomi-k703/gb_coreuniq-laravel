@@ -7,17 +7,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ExperienceController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,16 +15,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// テスト用ルート（ここに追加）
-Route::get('/test-create', [ExperienceController::class, 'testCreate']);
+// 経験データCRUDルート
+Route::get('/test-create', [ExperienceController::class, 'testCreate']); // テスト用
+Route::get('/experiences', [ExperienceController::class, 'index'])->name('experiences.index'); // 一覧
+Route::get('/experiences/create', [ExperienceController::class, 'create'])->name('experiences.create'); // 新規作成フォーム
+Route::post('/experiences', [ExperienceController::class, 'store'])->name('experiences.store'); // データ保存
+Route::get('/experiences/{id}/edit', [ExperienceController::class, 'edit'])->name('experiences.edit'); // 編集フォーム
+Route::put('/experiences/{id}', [ExperienceController::class, 'update'])->name('experiences.update'); // データ更新
+Route::delete('/experiences/{id}', [ExperienceController::class, 'destroy'])->name('experiences.destroy'); // データ削除
 
-// 経験一覧表示ルート（追加）
-Route::get('/experiences', [ExperienceController::class, 'index'])->name('experiences.index');
-
-// 経験追加フォーム表示 & 保存ルート（追加）
-Route::get('/experiences/create', [ExperienceController::class, 'create'])->name('experiences.create');
-Route::post('/experiences', [ExperienceController::class, 'store'])->name('experiences.store');
-
+// その他ルート
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
