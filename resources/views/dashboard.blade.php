@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('マイページ') }} //Dashboardから変更
+            {{ __('マイページ') }}
         </h2>
     </x-slot>
 
@@ -15,28 +15,18 @@
 
     <!-- セクション内リンク -->
     <div class="mt-6">
-        <a href="#section1" class="text-blue-500 underline">セクション1に移動</a>
-        <a href="#section2" class="text-blue-500 underline ml-4">セクション2に移動</a>
+        <a href="{{ route('experiences.create') }}" class="text-blue-500 underline">経験を入力する</a>
+        <a href="{{ route('experiences.index') }}" class="text-blue-500 underline ml-4">経験を一覧表示する</a>
+        <a href="{{ route('experiences.edit', ['id' => 1]) }}" class="text-blue-500 underline ml-4">経験を更新する</a>
+        <!-- ↑ 更新画面のリンクは仮でID 1にしています。動的に変更する場合は適宜修正してください。 -->
     </div>
 
-    <!-- セクション1 -->
-    <div id="section1" class="mt-12 bg-gray-100 p-6 rounded-lg shadow">
-        <h3 class="text-lg font-bold">セクション1</h3>
-        <p>これはセクション1の内容です。</p>
-    </div>
-
-    <!-- セクション2 -->
-    <div id="section2" class="mt-12 bg-gray-100 p-6 rounded-lg shadow">
-        <h3 class="text-lg font-bold">セクション2</h3>
-        <p>これはセクション2の内容です。</p>
-    </div>
-
-    <!-- プロフィール編集と外部リンク -->
+    <!-- 外部リンク一覧 -->
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("ようこそ！") }} //You're logged in!から変更
+                    {{ __("ようこそ！") }}
                 </div>
 
                 <div class="mt-6">
@@ -48,7 +38,9 @@
                 <!-- 外部リンク一覧 -->
                 <div class="mt-6">
                     <ul class="list-disc list-inside">
-                        <li><a href="/profile" class="text-blue-500 underline">プロフィール</a></li>
+                        <li><a href="{{ route('experiences.create') }}" class="text-blue-500 underline">経験を入力する</a></li>
+                        <li><a href="{{ route('experiences.index') }}" class="text-blue-500 underline">経験を一覧表示する</a></li>
+                        <li><a href="{{ route('experiences.edit', ['id' => 1]) }}" class="text-blue-500 underline">経験を更新する</a></li>
                         <li><a href="/tasks" class="text-blue-500 underline">タスク管理</a></li>
                         <li><a href="/settings" class="text-blue-500 underline">設定</a></li>
                     </ul>
