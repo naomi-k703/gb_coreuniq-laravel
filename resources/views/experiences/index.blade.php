@@ -15,24 +15,81 @@
 
     <!-- テーブルのデザインを調整するCSS -->
     <style>
-        /* テーブル全体の設定 */
+        /* ベーススタイル */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9fafb;  /* 背景色をシンプルな明るいグレーに */
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* テーブルのスタイル */
         table {
-            border-collapse: collapse; /* テーブルの境界線を統一 */
-            width: 100%; /* テーブルを画面いっぱいに表示 */
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-        /* ヘッダーとデータのセルに共通のデザインを適用 */
+
         th, td {
-            border: 1px solid #ddd; /* セルの境界線 */
-            padding: 8px; /* セル内の余白 */
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
         }
-        /* ヘッダー行の背景色を設定 */
+
         th {
-            background-color: #f4f4f4; /* 薄いグレー */
+            background-color: #f4f4f4; /* ヘッダー背景を薄いグレーに */
+            font-weight: bold;
         }
-        /* 行にカーソルを合わせたときの背景色を変更 */
+
         tr:hover {
-            background-color: #f1f1f1; /* ハイライトの薄い色 */
+            background-color: #f1f1f1;  /* 行にカーソルを合わせたときに背景色を変更 */
         }
+
+        /* ボタンデザイン */
+        .button {
+            padding: 6px 12px;
+            text-decoration: none;
+            color: white;
+            background-color: #6b7280;  /* ボタンの背景色はシンプルなグレー */
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #4b5563;  /* ボタンのホバー時に少し濃くなる */
+        }
+
+        .button-delete {
+            background-color: #dc2626;  /* 削除ボタンは赤に */
+        }
+
+        .button-delete:hover {
+            background-color: #b91c1c;  /* 削除ボタンのホバー時は濃い赤 */
+        }
+
+        /* セルの操作ボタンのスタイル */
+        td button {
+            background: none;
+            border: none;
+            color: #1e40af;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        td button:hover {
+            color: #0f172a; /* ボタンのホバー時に色を少し変える */
+        }
+
     </style>
 </head>
 <body>
@@ -68,15 +125,14 @@
                 <!-- 操作カラム -->
                 <td>
                     <!-- 編集ボタン -->
-                    <!-- クリックすると編集ページに遷移 -->
-                    <a href="{{ route('experiences.edit', $experience->id) }}" class="text-blue-500 underline">編集</a>
+                    <a href="{{ route('experiences.edit', $experience->id) }}" class="button">編集</a>
 
                     <!-- 削除ボタン -->
                     <!-- フォームを使ってデータを削除 -->
                     <form action="{{ route('experiences.destroy', $experience->id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
                         @csrf <!-- CSRFトークンでセキュリティを強化 -->
                         @method('DELETE') <!-- HTTPメソッドをDELETEに指定 -->
-                        <button type="submit" class="text-red-500 underline">削除</button> <!-- 削除ボタン -->
+                        <button type="submit" class="button button-delete">削除</button> <!-- 削除ボタン -->
                     </form>
                 </td>
             </tr>

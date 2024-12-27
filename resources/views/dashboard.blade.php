@@ -9,16 +9,22 @@
     <div class="p-6 text-gray-900">
         {{ __("こんにちは、") . Auth::user()->name . __(" さん！") }}
     </div>
-    <div class="p-6 text-gray-900">
+
+    <div class="p-6 text-gray-900 mb-6">
         {{ __("あなたのメールアドレス: ") . Auth::user()->email }}
     </div>
 
     <!-- セクション内リンク -->
-    <div class="mt-6">
-        <a href="{{ route('experiences.create') }}" class="text-blue-500 underline">経験を入力する</a>
-        <a href="{{ route('experiences.index') }}" class="text-blue-500 underline ml-4">経験を一覧表示する</a>
-        <a href="{{ route('experiences.edit', ['id' => 1]) }}" class="text-blue-500 underline ml-4">経験を更新する</a>
-        <!-- ↑ 更新画面のリンクは仮でID 1にしています。動的に変更する場合は適宜修正してください。 -->
+    <div class="mt-6 space-y-4">
+        <a href="{{ route('experiences.create') }}" class="bg-blue-500 hover:bg-blue-600 text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200">
+            経験を入力する
+        </a>
+        <a href="{{ route('experiences.index') }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200">
+            経験を一覧表示する
+        </a>
+        <a href="{{ route('experiences.edit', ['id' => 1]) }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200">
+            経験を更新する
+        </a>
     </div>
 
     <!-- 外部リンク一覧 -->
@@ -30,19 +36,19 @@
                 </div>
 
                 <div class="mt-6">
-                    <a href="/profile" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <a href="/profile" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-sm transition duration-200">
                         プロフィールを編集
                     </a>
                 </div>
 
                 <!-- 外部リンク一覧 -->
-                <div class="mt-6">
-                    <ul class="list-disc list-inside">
-                        <li><a href="{{ route('experiences.create') }}" class="text-blue-500 underline">経験を入力する</a></li>
-                        <li><a href="{{ route('experiences.index') }}" class="text-blue-500 underline">経験を一覧表示する</a></li>
-                        <li><a href="{{ route('experiences.edit', ['id' => 1]) }}" class="text-blue-500 underline">経験を更新する</a></li>
-                        <li><a href="/tasks" class="text-blue-500 underline">タスク管理</a></li>
-                        <li><a href="/settings" class="text-blue-500 underline">設定</a></li>
+                <div class="mt-6 space-y-2">
+                    <ul class="list-none">
+                        <li><a href="{{ route('experiences.create') }}" class="text-blue-500 hover:text-blue-600">経験を入力する</a></li>
+                        <li><a href="{{ route('experiences.index') }}" class="text-blue-500 hover:text-blue-600">経験を一覧表示する</a></li>
+                        <li><a href="{{ route('experiences.edit', ['id' => 1]) }}" class="text-blue-500 hover:text-blue-600">経験を更新する</a></li>
+                        <li><a href="/tasks" class="text-blue-500 hover:text-blue-600">タスク管理</a></li>
+                        <li><a href="/settings" class="text-blue-500 hover:text-blue-600">設定</a></li>
                     </ul>
                 </div>
             </div>
@@ -54,5 +60,4 @@
         &copy; {{ date('Y') }} My Application. All rights reserved.
     </footer>
 </x-app-layout>
-
 
