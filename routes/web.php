@@ -17,9 +17,8 @@ Route::get('/dashboard', function () {
 
 // 経験データCRUDルート
 Route::get('/test-create', [ExperienceController::class, 'testCreate']); // テスト用
-Route::get('/experiences', [ExperienceController::class, 'index'])->name('experiences.index'); // 一覧
-Route::get('/experiences/create', [ExperienceController::class, 'create'])->name('experiences.create'); // 新規作成フォーム
-Route::post('/experiences', [ExperienceController::class, 'store'])->name('experiences.store'); // データ保存
+Route::match(['get', 'post'], '/experiences', [ExperienceController::class, 'handleRequest'])->name('experiences.handle'); // GETとPOSTを統一
+Route::get('/experiences/index', [ExperienceController::class, 'index'])->name('experiences.index'); // 一覧ページ
 Route::get('/experiences/{id}/edit', [ExperienceController::class, 'edit'])->name('experiences.edit'); // 編集フォーム
 Route::put('/experiences/{id}', [ExperienceController::class, 'update'])->name('experiences.update'); // データ更新
 Route::delete('/experiences/{id}', [ExperienceController::class, 'destroy'])->name('experiences.destroy'); // データ削除
