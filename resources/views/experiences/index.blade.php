@@ -76,25 +76,16 @@
         .button-delete:hover {
             background-color: #b91c1c;  /* 削除ボタンのホバー時は濃い赤 */
         }
-
-        /* セルの操作ボタンのスタイル */
-        td button {
-            background: none;
-            border: none;
-            color: #1e40af;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        td button:hover {
-            color: #0f172a; /* ボタンのホバー時に色を少し変える */
-        }
-
     </style>
 </head>
 <body>
     <!-- ページの見出し -->
     <h1>経験の一覧</h1>
+
+    <!-- 新規作成ボタン -->
+    <div class="button-create" style="margin-bottom: 20px; text-align: center;">
+        <a href="{{ route('experiences.create') }}" class="button">新しい経験を作成</a>
+    </div>
 
     <!-- 経験データを表示するテーブル -->
     <table>
@@ -103,6 +94,7 @@
                 <!-- テーブルのカラム（列）の見出し -->
                 <th>ID</th> <!-- 経験の一意のID -->
                 <th>ユーザーID</th> <!-- ユーザーを識別するID -->
+                <th>年齢</th> <!-- 年齢を表示するカラムを追加 -->
                 <th>経験タイプ</th> <!-- 例: "嬉しかった" など -->
                 <th>経験の詳細</th> <!-- 経験の内容を説明する詳細 -->
                 <th>感情の強さ</th> <!-- 感情の度合いを1〜5で表現 -->
@@ -117,6 +109,7 @@
                 <!-- データベースから取得した値を表示 -->
                 <td>{{ $experience->id }}</td> <!-- 経験のID -->
                 <td>{{ $experience->user_id }}</td> <!-- ユーザーID -->
+                <td>{{ $experience->age }}</td> <!-- 年齢を表示 -->
                 <td>{{ $experience->experience_type }}</td> <!-- 経験タイプ -->
                 <td>{{ $experience->experience_detail }}</td> <!-- 経験の詳細 -->
                 <td>{{ $experience->emotion_strength }}</td> <!-- 感情の強さ -->

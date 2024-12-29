@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
 {
+    // リクエストを処理
     public function handleRequest(Request $request)
     {
         if ($request->isMethod('get')) {
-            // GETリクエスト: フォームを表示
-            return view('experiences.create');
+            return view('experiences.create'); // GETリクエストの場合
         } elseif ($request->isMethod('post')) {
-            // POSTリクエスト: データを保存
             $request->validate([
                 'user_id' => 'required|integer',
+                'age.*' => 'required|integer|min:0|max:120', // 年齢のバリデーションを追加
                 'experience_type.*' => 'required|in:嬉しかった,嫌だった',
                 'experience_detail.*' => 'required|string',
                 'emotion_strength.*' => 'required|integer|min:1|max:5',
@@ -25,51 +25,95 @@ class ExperienceController extends Controller
             foreach ($request->experience_type as $index => $type) {
                 $createdExperiences[] = Experience::create([
                     'user_id' => $request->user_id,
+                    'age' => $request->age[$index], // 年齢を保存
                     'experience_type' => $type,
                     'experience_detail' => $request->experience_detail[$index],
                     'emotion_strength' => $request->emotion_strength[$index],
                 ]);
             }
 
-            // 保存後に結果画面を表示
             return view('experiences.result', compact('createdExperiences'));
         }
 
-        // その他のHTTPメソッドは405エラー
         abort(405, 'Method Not Allowed');
     }
 
-    // 既存のインデックスページや編集、削除用のメソッドも残しておく
+    // 新しい経験を作成する画面を表示
+    public function create()
+    {
+        return view('experiences.create');
+    }
+
+    // 経験の一覧を表示
     public function index()
     {
         $experiences = Experience::all();
         return view('experiences.index', compact('experiences'));
     }
 
+    // 新しい経験を保存するメソッド
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|integer',
+            'age' => 'required|array',
+            'experience_type' => 'required|array',
+            'experience_detail' => 'required|array',
+            'emotion_strength' => 'required|array',
+            'age.*' => 'required|integer|min:0|max:120', // 年齢のバリデーションを追加
+            'experience_type.*' => 'required|in:嬉しかった,嫌だった',
+            'experience_detail.*' => 'required|string|max:255',
+            'emotion_strength.*' => 'required|integer|min:1|max:5',
+        ]);
+
+        foreach ($request->experience_type as $index => $type) {
+            Experience::create([
+                'user_id' => $request->user_id,
+                'age' => $request->age[$index], // 年齢を保存
+                'experience_type' => $type,
+                'experience_detail' => $request->experience_detail[$index],
+                'emotion_strength' => $request->emotion_strength[$index],
+            ]);
+        }
+
+        return redirect()->route('experiences.index')->with('success', '経験が保存されました！');
+    }
+
+    // 経験を編集する画面を表示
     public function edit($id)
     {
         $experience = Experience::findOrFail($id);
         return view('experiences.edit', compact('experience'));
     }
 
+    // 経験を更新する
     public function update(Request $request, $id)
     {
         $request->validate([
             'user_id' => 'required|integer',
+            'age' => 'required|integer|min:0|max:120', // 年齢のバリデーションを追加
             'experience_type' => 'required|in:嬉しかった,嫌だった',
             'experience_detail' => 'required|string',
             'emotion_strength' => 'required|integer|min:1|max:5',
         ]);
 
         $experience = Experience::findOrFail($id);
-        $experience->update($request->all());
-        return redirect()->route('experiences.index')->with('success', __('データが更新されました！'));
+        $experience->update([
+            'user_id' => $request->user_id,
+            'age' => $request->age, // 年齢を更新
+            'experience_type' => $request->experience_type,
+            'experience_detail' => $request->experience_detail,
+            'emotion_strength' => $request->emotion_strength,
+        ]);
+
+        return redirect()->route('experiences.index')->with('success', 'データが更新されました！');
     }
 
+    // 経験を削除する
     public function destroy($id)
     {
         $experience = Experience::findOrFail($id);
         $experience->delete();
-        return redirect()->route('experiences.index')->with('success', __('データが削除されました！'));
+        return redirect()->route('experiences.index')->with('success', 'データが削除されました！');
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>経験追加</title>
+    <title>経験の棚卸し</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
         /* 全体のスタイル */
@@ -34,6 +34,20 @@
             right: 20px;
             font-size: 16px;
             color: #4b5563;
+        }
+        .nav-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            background-color: #6b7280;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-button:hover {
+            background-color: #4b5563;
         }
         label {
             font-weight: bold;
@@ -120,8 +134,12 @@
     </div>
 
     <div class="container">
-        <h1>経験を追加</h1>
-        <form method="POST" action="{{ route('experiences.handle') }}">
+        <!-- ダッシュボードに戻るボタン -->
+        <h1>STEP１自己発見：経験の棚卸し</h1>
+
+        <a href="/dashboard" class="nav-button">ダッシュボードに戻る</a>
+        
+        <form method="POST" action="{{ route('experiences.store') }}">
             @csrf
 
             <div class="dynamic-form">
@@ -135,6 +153,10 @@
                     <button type="button" class="remove-btn" onclick="removeExperience(this)">
                         <i class="fas fa-trash-alt"></i>
                     </button>
+
+                    <label for="age">年齢：</label>
+                    <input type="number" name="age[]" min="0" max="120" placeholder="年齢を入力" required>
+
                     <label>経験タイプ：</label>
                     <select name="experience_type[]" required>
                         <option value="嬉しかった">😊 嬉しかった</option>
@@ -170,6 +192,10 @@
                 <button type="button" class="remove-btn" onclick="removeExperience(this)">
                     <i class="fas fa-trash-alt"></i>
                 </button>
+
+                <label for="age">年齢：</label>
+                <input type="number" name="age[]" min="0" max="120" placeholder="年齢を入力" required>
+
                 <label>経験タイプ：</label>
                 <select name="experience_type[]" required>
                     <option value="嬉しかった">😊 嬉しかった</option>

@@ -6,17 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
         Schema::table('experiences', function (Blueprint $table) {
-            $table->string('new_column')->nullable(); // 必要に応じて新しいカラムを追加
+            $table->integer('age')->nullable()->after('user_id'); // 「年齢」カラムを追加
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::table('experiences', function (Blueprint $table) {
-            $table->dropColumn('new_column'); // 新しいカラムを削除
+            $table->dropColumn('age'); // 「年齢」カラムを削除
         });
     }
 };

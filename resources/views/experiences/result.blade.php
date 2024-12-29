@@ -55,6 +55,7 @@
             <tr>
                 <th>ID</th>
                 <th>ユーザーID</th>
+                <th>年齢</th> <!-- 年齢のカラムを追加 -->
                 <th>経験タイプ</th>
                 <th>経験の詳細</th>
                 <th>感情の強さ</th>
@@ -66,6 +67,7 @@
             <tr>
                 <td>{{ $experience->id }}</td>
                 <td>{{ $experience->user_id }}</td>
+                <td>{{ $experience->age }}</td> <!-- 年齢を表示 -->
                 <td>{{ $experience->experience_type }}</td>
                 <td>{{ $experience->experience_detail }}</td>
                 <td>{{ $experience->emotion_strength }}</td>

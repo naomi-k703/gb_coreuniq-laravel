@@ -12,7 +12,10 @@
         @method('PUT')
 
         <label for="user_id">ユーザーID:</label>
-        <input type="number" name="user_id" value="{{ $experience->user_id }}" required>
+        <input type="number" name="user_id" value="{{ $experience->user_id }}" readonly required>
+
+        <label for="age">年齢:</label>
+        <input type="number" name="age" value="{{ $experience->age }}" min="0" max="120" required>
 
         <label for="experience_type">経験タイプ:</label>
         <select name="experience_type" required>
