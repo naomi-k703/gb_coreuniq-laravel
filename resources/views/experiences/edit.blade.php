@@ -4,6 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>経験編集</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #495057;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #495057;
+        }
+
+        input[type="number"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: linear-gradient(90deg, #4caf50, #81c784); /* プログレスバーと同じ緑 */
+            color: #fff;
+            transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #43a047, #66bb6a); /* ホバー時に少し濃く */
+            transform: scale(1.02); /* 少し拡大してアニメーションを追加 */
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            form {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>経験を編集</h1>
