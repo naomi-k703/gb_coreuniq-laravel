@@ -13,9 +13,9 @@ Route::get('/', function () {
 });
 
 // ダッシュボード
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ExperienceController::class, 'dashboard'])
+    ->middleware(['auth', 'verified']) // ログイン必須
+    ->name('dashboard');
 
 // 経験データCRUDルート
 Route::group([], function () {
@@ -37,12 +37,17 @@ Route::group([], function () {
     Route::delete('/experiences/{id}', [ExperienceController::class, 'destroy'])->name('experiences.destroy'); // データ削除
 });
 
-// その他のルート
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+// プロフィール関連のルート
+Route::middleware(['auth'])->group(function () {
+    // プロフィールの表示と編集
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+// その他のルート
+Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
     Route::get('/about', [AboutController::class, 'index'])->name('about.index');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

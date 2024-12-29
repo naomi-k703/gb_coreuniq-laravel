@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_image_url', // プロフィール画像のURL
+        'role',              // ユーザーの役職
+        'last_login_at',     // 最終ログイン日時
     ];
 
     /**
@@ -41,5 +44,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'last_login_at' => 'datetime', // `last_login_at`を日付としてキャスト
     ];
 }

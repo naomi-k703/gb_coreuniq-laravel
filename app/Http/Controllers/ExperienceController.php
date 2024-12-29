@@ -116,4 +116,19 @@ class ExperienceController extends Controller
         $experience->delete();
         return redirect()->route('experiences.index')->with('success', 'データが削除されました！');
     }
+
+    // ダッシュボード用のデータを準備して表示
+    public function dashboard()
+    {
+        // 最近の経験データ（最新5件）
+        $recentInputs = Experience::latest()->take(5)->get();
+
+        // 統計データ
+        $totalExperiences = Experience::count(); // 総経験数
+        $happyExperiences = Experience::where('experience_type', '嬉しかった')->count(); // 嬉しかった数
+        $sadExperiences = Experience::where('experience_type', '嫌だった')->count(); // 嫌だった数
+
+        // ダッシュボードビューにデータを渡す
+        return view('dashboard', compact('recentInputs', 'totalExperiences', 'happyExperiences', 'sadExperiences'));
+    }
 }
