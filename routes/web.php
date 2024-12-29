@@ -35,6 +35,9 @@ Route::group([], function () {
 
     // 削除
     Route::delete('/experiences/{id}', [ExperienceController::class, 'destroy'])->name('experiences.destroy'); // データ削除
+
+    // 感情曲線表示
+    Route::get('/experiences/chart', [ExperienceController::class, 'chart'])->name('experiences.chart'); // 感情曲線ページ
 });
 
 // プロフィール関連のルート

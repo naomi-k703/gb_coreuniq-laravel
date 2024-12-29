@@ -131,4 +131,17 @@ class ExperienceController extends Controller
         // ダッシュボードビューにデータを渡す
         return view('dashboard', compact('recentInputs', 'totalExperiences', 'happyExperiences', 'sadExperiences'));
     }
+
+    // 感情曲線を表示するメソッド
+    public function chart()
+    {
+        // 必要なデータ（id, emotion_strength, experience_detail）を取得
+        $experiences = Experience::select('id', 'emotion_strength', 'experience_detail')->get();
+
+        // デバッグ用: 取得したデータを確認
+        //dd($experiences);
+
+        // ビューにデータを渡す
+        return view('experiences.chart', compact('experiences'));
+    }
 }

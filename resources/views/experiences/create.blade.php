@@ -155,7 +155,7 @@
                     </button>
 
                     <label for="age">年齢：</label>
-                    <input type="number" name="age[]" min="0" max="120" placeholder="年齢を入力" required>
+                    <input type="number" name="age[]" min="0" max="120" placeholder="例: 25" required>
 
                     <label>経験タイプ：</label>
                     <select name="experience_type[]" required>
@@ -163,8 +163,8 @@
                         <option value="嫌だった">😞 嫌だった</option>
                     </select>
 
-                    <label>経験の詳細：</label>
-                    <textarea name="experience_detail[]" placeholder="経験の詳細" rows="3" required></textarea>
+                    <label>経験の詳細（例: 内容や背景）：</label>
+                    <textarea name="experience_detail[]" placeholder="例: 学校で友達に助けられて嬉しかった経験" rows="3" required></textarea>
 
                     <label>感情の強さ（1-5）：</label>
                     <div class="slider-container">
@@ -194,7 +194,7 @@
                 </button>
 
                 <label for="age">年齢：</label>
-                <input type="number" name="age[]" min="0" max="120" placeholder="年齢を入力" required>
+                <input type="number" name="age[]" min="0" max="120" placeholder="例: 25" required>
 
                 <label>経験タイプ：</label>
                 <select name="experience_type[]" required>
@@ -202,8 +202,8 @@
                     <option value="嫌だった">😞 嫌だった</option>
                 </select>
 
-                <label>経験の詳細：</label>
-                <textarea name="experience_detail[]" placeholder="経験の詳細" rows="3" required></textarea>
+                <label>経験の詳細（例: 内容や背景）：</label>
+                <textarea name="experience_detail[]" placeholder="例: 学校で友達に助けられて嬉しかった経験" rows="3" required></textarea>
 
                 <label>感情の強さ（1-5）：</label>
                 <div class="slider-container">
