@@ -31,8 +31,8 @@
         }
 
         .chart-container {
-            max-width: 800px; /* 最大幅 */
-            margin: 0 auto; /* 中央寄せ */
+            max-width: 800px;
+            margin: 0 auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -41,22 +41,55 @@
 
         canvas {
             display: block;
-            max-width: 100%; /* 親コンテナに合わせる */
-            height: 400px; /* 高さを固定 */
+            max-width: 100%;
+            height: 400px;
+        }
+
+        /* ボタン共通スタイル */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            display: inline-block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            background-color: #10b981;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background-color: #059669;
         }
     </style>
 </head>
 <body>
+    <!-- ボタンの配置 -->
+    <div class="nav-buttons">
+        <a href="{{ route('experiences.create') }}" class="nav-button">新規作成</a>
+        <a href="{{ route('experiences.index') }}" class="nav-button">経験一覧</a>
+        <a href="/dashboard" class="nav-button">ダッシュボード</a>
+    </div>
+
+    <!-- ページタイトルと説明 -->
     <h1>感情曲線</h1>
     <p>
         以下のグラフは、各経験の感情の強さを視覚化したものです。<br>
         データポイントにカーソルを合わせると、経験の詳細（コメント）が表示されます。
     </p>
 
+    <!-- グラフのコンテナ -->
     <div class="chart-container">
         <canvas id="emotionChart"></canvas>
     </div>
 
+    <!-- Chart.js のスクリプト -->
     <script>
         // サーバーサイドから渡されたデータ
         const experiences = @json($experiences);

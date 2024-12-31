@@ -41,13 +41,13 @@
             padding: 10px 15px;
             text-decoration: none;
             color: white;
-            background-color: #6b7280;
+            background-color: #10b981; /* 緑色 */
             border-radius: 8px;
             font-size: 14px;
             transition: background-color 0.3s ease;
         }
         .nav-button:hover {
-            background-color: #4b5563;
+            background-color: #059669;
         }
         label {
             font-weight: bold;
@@ -122,6 +122,11 @@
             justify-content: space-between;
             margin-top: 15px;
         }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -134,11 +139,17 @@
     </div>
 
     <div class="container">
-        <!-- ダッシュボードに戻るボタン -->
+        <!-- ページタイトル -->
         <h1>STEP１自己発見：経験の棚卸し</h1>
 
-        <a href="/dashboard" class="nav-button">ダッシュボードに戻る</a>
+        <!-- ナビゲーションボタン -->
+        <div class="nav-buttons">
+            <a href="/dashboard" class="nav-button">ダッシュボードに戻る</a>
+            <a href="/experiences/chart" class="nav-button">感情曲線を見る</a>
+            <a href="{{ route('experiences.index') }}" class="nav-button">経験一覧を見る</a>
+        </div>
         
+        <!-- フォーム -->
         <form method="POST" action="{{ route('experiences.store') }}">
             @csrf
 

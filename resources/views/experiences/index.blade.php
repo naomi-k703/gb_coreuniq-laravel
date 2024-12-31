@@ -54,7 +54,7 @@
         }
 
         /* ボタン共通スタイル */
-        .button, .btn-primary {
+        .button, .btn-primary, .button-edit, .button-delete {
             padding: 10px 20px;
             font-size: 14px;
             border-radius: 8px;
@@ -66,35 +66,45 @@
 
         /* 新規作成ボタン */
         .button {
-            background-color: #6b7280;
+            background-color: #10b981; /* 緑 */
             color: white;
         }
 
         .button:hover {
-            background-color: #4b5563;
+            background-color: #059669;
             transform: scale(1.05); /* ホバー時に拡大 */
         }
 
         /* 感情曲線ボタン */
         .btn-primary {
-            background-color: #2563eb;
+            background-color: #10b981; /* 緑 */
             color: white;
         }
 
         .btn-primary:hover {
-            background-color: #1d4ed8;
+            background-color: #059669;
+            transform: scale(1.05); /* ホバー時に拡大 */
+        }
+
+        /* 編集ボタン */
+        .button-edit {
+            background-color: #6b7280; /* グレー */
+            color: white;
+        }
+
+        .button-edit:hover {
+            background-color: #4b5563; /* ホバー時の濃いグレー */
             transform: scale(1.05); /* ホバー時に拡大 */
         }
 
         /* 削除ボタン */
         .button-delete {
-            background-color: #dc2626;
+            background-color: #6b7280; /* グレー（編集ボタンと統一） */
             color: white;
-            border: none;
         }
 
         .button-delete:hover {
-            background-color: #b91c1c;
+            background-color: #4b5563; /* ホバー時の濃いグレー（編集ボタンと統一） */
             transform: scale(1.05); /* ホバー時に拡大 */
         }
 
@@ -114,8 +124,9 @@
 
     <!-- ボタンを右上に配置 -->
     <div class="button-group">
-        <a href="/experiences/chart" class="btn-primary">感情曲線を見る</a>
         <a href="{{ route('experiences.create') }}" class="button">新しい経験を作成</a>
+        <a href="/experiences/chart" class="btn-primary">感情曲線を見る</a>
+        <a href="{{ route('dashboard') }}" class="btn-primary">マイページ</a>
     </div>
 
     <!-- テーブル -->
@@ -144,7 +155,7 @@
                 <td>{{ $experience->created_at }}</td>
                 <td>
                     <!-- 編集ボタン -->
-                    <a href="{{ route('experiences.edit', $experience->id) }}" class="button">編集</a>
+                    <a href="{{ route('experiences.edit', $experience->id) }}" class="button-edit">編集</a>
 
                     <!-- 削除ボタン -->
                     <form action="{{ route('experiences.destroy', $experience->id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
