@@ -50,20 +50,15 @@
             </div>
         </div>
 
-        <!-- 最近の入力 & 統計データ -->
+        <!-- 経験の多様性チャート & 統計データ -->
         <div class="flex flex-wrap gap-6 layout-row">
-            <!-- 最近の入力部分 -->
+            <!-- 経験の多様性チャート部分 -->
             <div class="bg-white rounded-lg shadow p-6 flex-1">
-                <h3 class="text-lg font-semibold text-gray-800">最近の入力</h3>
-                <ul id="recent-inputs" class="list-disc pl-6 text-gray-800 mt-4">
-                    @foreach ($recentInputs as $input)
-                        <li>
-                            タイプ: {{ $input->experience_type }},
-                            スコア: {{ $input->emotion_strength }},
-                            詳細: {{ $input->experience_detail }}
-                        </li>
-                    @endforeach
-                </ul>
+                <h3 class="text-lg font-semibold text-gray-800">経験の多様性</h3>
+                <div style="max-width: 400px; margin: 0 auto;">
+                    <canvas id="experienceDiversityChart"></canvas>
+                </div>
+                <p class="text-gray-800 mt-4">あなたが記録した経験の割合を視覚化しています。</p>
             </div>
 
             <!-- 統計データ部分 -->
@@ -74,6 +69,10 @@
                     <li>嬉しかった経験数: {{ $happyExperiences }}</li>
                     <li>嫌だった経験数: {{ $sadExperiences }}</li>
                 </ul>
+                <!-- 積み木グラフ -->
+                <div style="max-width: 400px; margin: 20px auto;">
+                    <canvas id="stackedBarChart"></canvas>
+                </div>
             </div>
         </div>
 
@@ -111,39 +110,97 @@
         .layout-row {
             display: flex;
             flex-wrap: wrap;
-            justify-content: flex-start; /* 左詰めで配置 */
-            align-items: flex-start; /* 上詰めに配置 */
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
         }
 
         .flex-1 {
             flex: 1;
-            min-width: calc(50% - 1rem);
+            min-width: 300px;
+            max-width: 48%;
+            margin: 0 auto;
         }
 
-        .gap-6 {
-            gap: 1.5rem;
-        }
-
-        .space-y-6 > * + * {
-            margin-top: 1.5rem;
-        }
-
-        .menu-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        #menu.hidden {
-            display: none;
+        canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
         }
     </style>
 
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('hidden');
-        }
+        // 多様性チャート
+        const diversityCtx = document.getElementById('experienceDiversityChart').getContext('2d');
+        const diversityData = {
+            labels: ['嬉しかった', '嫌だった'],
+            datasets: [{
+                data: [{{ $happyExperiences }}, {{ $sadExperiences }}],
+                backgroundColor: ['#4caf50', '#f44336'],
+            }]
+        };
+
+        new Chart(diversityCtx, {
+            type: 'pie',
+            data: diversityData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const total = context.dataset.data.reduce((sum, value) => sum + value, 0);
+                                const percentage = ((context.raw / total) * 100).toFixed(1);
+                                return `${context.label}: ${context.raw}件 (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 積み木グラフ
+        const stackedCtx = document.getElementById('stackedBarChart').getContext('2d');
+        new Chart(stackedCtx, {
+            type: 'bar',
+            data: {
+                labels: ['嬉しかった', '嫌だった'],
+                datasets: [{
+                    label: '経験の割合',
+                    data: [{{ $happyExperiences }}, {{ $sadExperiences }}],
+                    backgroundColor: ['#4caf50', '#f44336'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const total = context.dataset.data.reduce((sum, value) => sum + value, 0);
+                                const percentage = ((context.raw / total) * 100).toFixed(1);
+                                return `${context.label}: ${context.raw}件 (${percentage}%)`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    },
+                    x: {
+                        stacked: true
+                    }
+                }
+            }
+        });
     </script>
 </x-app-layout>
