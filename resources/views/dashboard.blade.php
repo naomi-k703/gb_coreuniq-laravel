@@ -59,6 +59,11 @@
                     <canvas id="experienceDiversityChart"></canvas>
                 </div>
                 <p class="text-gray-800 mt-4">あなたが記録した経験の割合を視覚化しています。</p>
+                <ul class="list-disc pl-6 text-gray-800 mt-4">
+                    <li>総経験数: {{ $totalExperiences }}</li>
+                    <li>嬉しかった経験数: {{ $happyExperiences }}</li>
+                    <li>嫌だった経験数: {{ $sadExperiences }}</li>
+                </ul>
             </div>
 
             <!-- 統計データ部分 -->
@@ -74,6 +79,23 @@
                     <canvas id="stackedBarChart"></canvas>
                 </div>
             </div>
+
+            <!-- フィードバック一覧部分 -->
+            <div class="bg-white rounded-lg shadow p-6 flex-1">
+                <h3 class="text-lg font-semibold text-gray-800">送信されたフィードバック</h3>
+                <ul class="list-disc pl-6 text-gray-800 mt-4">
+                    @foreach ($feedbacks->take(5) as $feedback) <!-- 最大5件を表示 -->
+                    <li class="mb-2">
+                    <strong>{{ $feedback->feedback_provider }}</strong>: {{ Str::limit($feedback->feedback_content, 50) }}
+                    <span class="text-sm text-gray-600">({{ $feedback->status }})</span>
+                    </li>
+                    @endforeach
+                </ul>
+            　　<a href="{{ route('feedback.index') }}" class="mt-4 inline-block bg-blue-500 text-blue px-4 py-2 rounded hover:bg-blue-600">
+                全てのフィードバックを見る
+                 </a>
+            </div>
+
         </div>
 
         <!-- ヘルプセクション部分 -->

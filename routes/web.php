@@ -10,21 +10,21 @@ use Illuminate\Support\Facades\Route;
 
 // ウェルカムページ
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome'); // 初期画面表示
 });
 
 // ダッシュボード
 Route::get('/dashboard', [ExperienceController::class, 'dashboard'])
     ->middleware(['auth', 'verified']) // ログイン必須
-    ->name('dashboard');
+    ->name('dashboard'); // ダッシュボードページのルート名
 
 // 経験データCRUDルート
 Route::group([], function () {
     // テスト用ルート
-    Route::get('/test-create', [ExperienceController::class, 'testCreate']); 
+    Route::get('/test-create', [ExperienceController::class, 'testCreate']); // テストデータ作成ページ
 
     // 一覧表示
-    Route::get('/experiences/index', [ExperienceController::class, 'index'])->name('experiences.index'); 
+    Route::get('/experiences/index', [ExperienceController::class, 'index'])->name('experiences.index'); // 経験一覧表示
 
     // 新規作成と保存処理
     Route::get('/experiences/create', [ExperienceController::class, 'create'])->name('experiences.create'); // 新規作成ページ
@@ -43,25 +43,30 @@ Route::group([], function () {
 
 // フィードバック関連のルート（新規追加・修正済み）
 Route::middleware(['auth'])->group(function () {
-    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index'); // フィードバック一覧表示
-    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create'); // フィードバックフォーム表示（追加）
-    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store'); // フィードバック送信
+    // フィードバック一覧表示
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index'); // フィードバック一覧ページ
+
+    // フィードバック送信フォーム表示
+    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create'); // 新規フィードバック入力ページ
+
+    // フィードバック送信処理
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store'); // 新規フィードバック保存
 });
 
 // プロフィール関連のルート
 Route::middleware(['auth'])->group(function () {
     // プロフィールの表示と編集
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show'); // プロフィール表示
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit'); // プロフィール編集ページ
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update'); // プロフィール更新処理
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); // プロフィール削除
 });
 
 // その他のルート
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home.index');
-    Route::get('/about', [AboutController::class, 'index'])->name('about.index');
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/home', [HomeController::class, 'index'])->name('home.index'); // ホームページ
+    Route::get('/about', [AboutController::class, 'index'])->name('about.index'); // Aboutページ
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index'); // Contactページ
 });
 
 require __DIR__.'/auth.php'; // Breezeの認証ルートを読み込み

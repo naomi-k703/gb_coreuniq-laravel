@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
+use App\Models\Feedback; // フィードバックモデルを追加
 use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
@@ -128,8 +129,17 @@ class ExperienceController extends Controller
         $happyExperiences = Experience::where('experience_type', '嬉しかった')->count(); // 嬉しかった数
         $sadExperiences = Experience::where('experience_type', '嫌だった')->count(); // 嫌だった数
 
+        // フィードバックデータを取得（最新5件）【追記部分】
+        $feedbacks = Feedback::latest()->take(5)->get();
+
         // ダッシュボードビューにデータを渡す
-        return view('dashboard', compact('recentInputs', 'totalExperiences', 'happyExperiences', 'sadExperiences'));
+        return view('dashboard', compact(
+            'recentInputs',           // 最近の経験データ
+            'totalExperiences',       // 統計データ: 総経験数
+            'happyExperiences',       // 統計データ: 嬉しかった数
+            'sadExperiences',         // 統計データ: 嫌だった数
+            'feedbacks'               // フィードバックデータ【追記】
+        ));
     }
 
     // 感情曲線を表示するメソッド
@@ -137,9 +147,6 @@ class ExperienceController extends Controller
     {
         // 必要なデータ（id, emotion_strength, experience_detail）を取得
         $experiences = Experience::select('id', 'emotion_strength', 'experience_detail')->get();
-
-        // デバッグ用: 取得したデータを確認
-        //dd($experiences);
 
         // ビューにデータを渡す
         return view('experiences.chart', compact('experiences'));
