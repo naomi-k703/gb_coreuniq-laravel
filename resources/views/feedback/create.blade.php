@@ -20,7 +20,7 @@
                 <textarea id="feedback_content" name="feedback_content" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="フィードバック内容を入力してください" required></textarea>
             </div>
             <div class="flex justify-end">
-                <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600">
+                <button type="submit" class="border border-gray-300 bg-white text-gray-700 font-medium py-2 px-4 rounded hover:bg-gray-100">
                     送信
                 </button>
             </div>
