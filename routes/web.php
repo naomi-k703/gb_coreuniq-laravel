@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\FeedbackController; // 追加: フィードバックコントローラー
 use Illuminate\Support\Facades\Route;
 
 // ウェルカムページ
@@ -40,6 +41,13 @@ Route::group([], function () {
     Route::get('/experiences/chart', [ExperienceController::class, 'chart'])->name('experiences.chart'); // 感情曲線ページ
 });
 
+// フィードバック関連のルート（新規追加・修正済み）
+Route::middleware(['auth'])->group(function () {
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index'); // フィードバック一覧表示
+    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create'); // フィードバックフォーム表示（追加）
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store'); // フィードバック送信
+});
+
 // プロフィール関連のルート
 Route::middleware(['auth'])->group(function () {
     // プロフィールの表示と編集
@@ -56,4 +64,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__.'/auth.php'; // Breezeの認証ルートを読み込み
