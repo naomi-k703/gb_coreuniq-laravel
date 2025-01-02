@@ -82,20 +82,21 @@
 
             <!-- フィードバック一覧部分 -->
             <div class="bg-white rounded-lg shadow p-6 flex-1">
-                <h3 class="text-lg font-semibold text-gray-800">送信されたフィードバック</h3>
-                <ul class="list-disc pl-6 text-gray-800 mt-4">
-                    @foreach ($feedbacks->take(5) as $feedback) <!-- 最大5件を表示 -->
-                    <li class="mb-2">
-                    <strong>{{ $feedback->feedback_provider }}</strong>: {{ Str::limit($feedback->feedback_content, 50) }}
-                    <span class="text-sm text-gray-600">({{ $feedback->status }})</span>
-                    </li>
+                <h3 class="text-lg font-semibold text-gray-800">あなたの強み</h3>
+                <p class="text-gray-600 mb-4">周囲から見たあなたの素晴らしい部分がここに表示されます。</p>
+                <div class="space-y-4">
+                    @foreach ($feedbacks as $feedback)
+                        <div class="p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
+                            <p class="text-blue-700 font-bold">{{ $feedback->feedback_provider }}</p>
+                            <p class="text-gray-800 mt-2">「{{ $feedback->feedback_content }}」</p>
+                            <span class="text-sm text-gray-500 block mt-1">ステータス: {{ $feedback->status }}</span>
+                        </div>
                     @endforeach
-                </ul>
-            　　<a href="{{ route('feedback.index') }}" class="mt-4 inline-block bg-blue-500 text-blue px-4 py-2 rounded hover:bg-blue-600">
-                全てのフィードバックを見る
-                 </a>
+                </div>
+                <a href="{{ route('feedback.index') }}" class="mt-4 inline-block bg-blue-500   text-gray px-4 py-2 rounded hover:bg-blue-600">
+                    全てのフィードバックを見る
+                </a>
             </div>
-
         </div>
 
         <!-- ヘルプセクション部分 -->
