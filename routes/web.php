@@ -57,5 +57,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 });
 
+// ヘルプページのルート（ログイン必須）
+Route::middleware(['auth'])->group(function () {
+    Route::get('/help', function () {
+        return view('help.index');
+    })->name('help.index');
+
+    Route::get('/help/faq', function () {
+        return view('help.faq');
+    })->name('help.faq');
+});
+
+
 // Breeze の認証ルート
 require __DIR__.'/auth.php';
