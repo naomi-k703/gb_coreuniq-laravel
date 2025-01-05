@@ -1,5 +1,6 @@
 <x-guest-layout>
     <!-- 背景スタイルを追加 -->
+    
     <style>
         body {
             background: linear-gradient(to bottom, #eef2ff, #ffffff); /* Welcomeページと同じ背景色 */

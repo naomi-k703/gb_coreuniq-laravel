@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="bg-gradient-to-b from-[#eef6fc] to-[#ffffff] min-h-screen py-10">
         <div class="max-w-4xl mx-auto bg-white shadow-md rounded-md">
-            <h1 class="text-3xl font-bold text-center text-gray-800 py-6">システムの使い方</h1>
+            <h1 class="text-3xl font-bold text-center /help/faq/help/faq/help/faq/help/faq/help/faq/help/faq py-6">システムの使い方</h1>
             <div class="p-6 text-gray-700">
                 <p class="mb-4">以下にシステムの使い方を説明します。</p>
                 <ol class="list-decimal pl-6 space-y-2">
@@ -11,7 +11,7 @@
                 </ol>
                 <div class="text-center mt-8">
                     <a href="{{ route('help.faq') }}" 
-                       class="bg-[#4A90E2] hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md shadow-md">
+                       class="bg-[#4A90E2] hover:text-blue-700 text-gray font-bold py-2 px-6 rounded-md shadow-md">
                         よくある質問はこちら
                     </a>
                 </div>
