@@ -34,10 +34,15 @@ class FeedbackController extends Controller
         return redirect()->route('feedback.create')->with('success', 'フィードバックが送信されました！');
     }
 
-    // フィードバック一覧表示
-    public function index()
+    // フィードバックサマリー表示
+    public function summary()
     {
+        // 現在の認証ユーザーのフィードバックを取得
         $feedbacks = Feedback::where('user_id', auth()->id())->get();
-        return view('feedback.index', compact('feedbacks'));
+
+        // summary.blade.php にデータを渡す
+        return view('feedback.summary', compact('feedbacks'));
     }
 }
+
+

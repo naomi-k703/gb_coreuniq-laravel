@@ -93,9 +93,10 @@
                         </div>
                     @endforeach
                 </div>
-                <a href="{{ route('feedback.index') }}" class="mt-4 inline-block bg-blue-500   text-gray px-4 py-2 rounded hover:bg-blue-600">
+                <a href="{{ route('feedback.summary') }}" class="mt-4 inline-block bg-blue-500 text-gray px-4 py-2 rounded hover:bg-blue-600">
                     全てのフィードバックを見る
                 </a>
+                
             </div>
         </div>
 

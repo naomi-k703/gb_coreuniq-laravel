@@ -32,9 +32,9 @@ Route::group([], function () {
 
 // フィードバック関連のルート
 Route::middleware(['auth'])->group(function () {
-    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');
-    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+    Route::get('/feedback/summary', [FeedbackController::class, 'summary'])->name('feedback.summary'); // サマリーページ
+    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');   // フィードバック作成
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');         // フィードバック保存
 });
 
 // **`layouts.feedback` に対応するルートを追加**
@@ -67,7 +67,6 @@ Route::middleware(['auth'])->group(function () {
         return view('help.faq');
     })->name('help.faq');
 });
-
 
 // Breeze の認証ルート
 require __DIR__.'/auth.php';
