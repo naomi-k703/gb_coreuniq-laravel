@@ -15,8 +15,8 @@ Route::get('/', function () {
 
 // ダッシュボード
 Route::get('/dashboard', [ExperienceController::class, 'dashboard'])
-    ->middleware(['auth', 'verified']) // ログイン必須
-    ->name('dashboard'); // ダッシュボードページのルート名
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 // 経験データCRUDルート
 Route::group([], function () {
@@ -32,14 +32,22 @@ Route::group([], function () {
 
 // フィードバック関連のルート
 Route::middleware(['auth'])->group(function () {
-    Route::get('/feedback/summary', [FeedbackController::class, 'summary'])->name('feedback.summary'); // サマリーページ
-    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');   // フィードバック作成
-    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');         // フィードバック保存
+    // フィードバック一覧
+    Route::get('/feedback/index', [FeedbackController::class, 'index'])->name('feedback.index');
+
+    // フィードバックサマリー
+    Route::get('/feedback/summary', [FeedbackController::class, 'summary'])->name('feedback.summary');
+
+    // フィードバック作成
+    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');
+
+    // フィードバック保存
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 });
 
-// **`layouts.feedback` に対応するルートを追加**
+// **`layouts.feedback` に対応するルート**
 Route::get('/layouts/feedback', function () {
-    return view('layouts.feedback'); // フィードバックのレイアウトページを表示
+    return view('layouts.feedback');
 })->name('layouts.feedback');
 
 // プロフィール関連のルート

@@ -18,19 +18,18 @@ class FeedbackController extends Controller
     {
         // バリデーション（入力チェック）
         $validated = $request->validate([
-            'feedback_provider' => 'required|string|max:255', // 何でも入力可能な文字列
-            'feedback_content' => 'required|string', // 必須
+            'feedback_provider' => 'required|string|max:255', // 提供者
+            'feedback_content' => 'required|string', // 内容
         ]);
 
         // データベースに保存
         Feedback::create([
-            'user_id' => auth()->id(), // 認証中のユーザーID
-            'feedback_provider' => $validated['feedback_provider'], // 入力された提供者
-            'feedback_content' => $validated['feedback_content'], // 入力された内容
-            'status' => 'pending', // 初期状態
+            'user_id' => auth()->id(),
+            'feedback_provider' => $validated['feedback_provider'],
+            'feedback_content' => $validated['feedback_content'],
+            'status' => 'pending',
         ]);
 
-        // フィードバック送信後、新しいフィードバック作成ページに戻る
         return redirect()->route('feedback.create')->with('success', 'フィードバックが送信されました！');
     }
 
@@ -40,9 +39,16 @@ class FeedbackController extends Controller
         // 現在の認証ユーザーのフィードバックを取得
         $feedbacks = Feedback::where('user_id', auth()->id())->get();
 
-        // summary.blade.php にデータを渡す
         return view('feedback.summary', compact('feedbacks'));
     }
-}
 
+    // フィードバック一覧表示
+    public function index()
+    {
+        // 認証ユーザーのフィードバック一覧を取得
+        $feedbacks = Feedback::where('user_id', auth()->id())->get();
+
+        return view('feedback.index', compact('feedbacks'));
+    }
+}
 
