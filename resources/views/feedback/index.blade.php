@@ -123,6 +123,7 @@
 
     <!-- JavaScript -->
     <script>
+        // 修正版 JavaScript
         const modal = document.getElementById('modal');
         const emailInput = document.getElementById('emailInput');
         const modalEmail = document.getElementById('modalEmail');
@@ -133,12 +134,14 @@
 
         // 依頼ボタンのクリックイベント
         requestButton.addEventListener('click', () => {
+            console.log("ボタンがクリックされました");
             const email = emailInput.value.trim();
+            console.log(`入力されたメールアドレス: ${email}`);
             if (!email) {
                 alert('メールアドレスを入力してください。');
                 return;
             }
-            modalEmail.textContent = 宛先: ${email};
+            modalEmail.textContent = `宛先: ${email}`;
             modal.classList.remove('hidden'); // モーダルを表示
         });
 
@@ -155,12 +158,13 @@
             // 保留中のリストに追加
             const newRequest = document.createElement('div');
             newRequest.className = 'flex items-center justify-between bg-gray-100 p-3 rounded-lg shadow-sm';
-            newRequest.innerHTML = <span>${email}</span><span class="text-yellow-500">保留中</span>;
+            newRequest.innerHTML = `<span>${email}</span><span class="text-yellow-500">保留中</span>`;
             pendingRequests.appendChild(newRequest);
 
             // モーダルを非表示にし、入力をクリア
             modal.classList.add('hidden');
             emailInput.value = '';
         });
+
     </script>
 </x-app-layout>
