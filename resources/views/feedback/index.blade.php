@@ -23,7 +23,7 @@
                 <button type="button" id="requestButton" 
                     class="bg-blue-500 text-gray px-4 py-2 rounded-lg shadow hover:bg-blue-600 focus:bg-blue-700 transition flex items-center">
                     <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h14M17 10l4-4m-4 4l4 4" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                     依頼する
                 </button>
