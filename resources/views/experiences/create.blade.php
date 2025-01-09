@@ -9,33 +9,36 @@
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="flex justify-between items-center mb-6">
-                        <div class="user-info text-gray-700 font-semibold">
+                    <div class="bg-gray-50 p-4 rounded shadow-md flex items-center space-x-4">
+                        <!-- ユーザーID -->
+                        <div class="flex items-center space-x-2">
+                            <label for="user_id" class="font-semibold text-gray-600">ユーザーID：</label>
+                            <input type="number" id="user_id" name="user_id" 
+                                   value="{{ Auth::check() ? Auth::user()->id : 0 }}" readonly required 
+                                   class="w-16 border border-gray-300 rounded px-2 py-1 text-center">
+                        </div>
+                    
+                        <!-- ユーザー名 -->
+                        <div class="text-gray-700 font-semibold">
                             @if (Auth::check())
                                 {{ Auth::user()->name }} さん
                             @else
                                 ゲスト さん
                             @endif
                         </div>
-
-                        <!-- ナビゲーションボタン -->
-                        <div class="nav-buttons flex gap-2">
-                            <a href="/dashboard" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">ダッシュボードに戻る</a>
-                            <a href="/experiences/chart" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">感情曲線を見る</a>
-                            <a href="{{ route('experiences.index') }}" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">経験一覧を見る</a>
-                        </div>
                     </div>
+                    
+                        <!-- ナビゲーションボタン -->
+                    <div class="nav-buttons flex gap-2 justify-end">
+                        <a href="/dashboard" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">ダッシュボードに戻る</a>
+                        <a href="/experiences/chart" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">感情曲線を見る</a>
+                        <a href="{{ route('experiences.index') }}" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">経験一覧を見る</a>
+                    </div>
+                    
 
                     <!-- フォーム -->
                     <form method="POST" action="{{ route('experiences.store') }}" class="space-y-6">
                         @csrf
-
-                        <div class="bg-gray-50 p-4 rounded shadow-md">
-                            <label for="user_id" class="block font-semibold text-gray-600">ユーザーID：</label>
-                            <input type="number" id="user_id" name="user_id" 
-                                   value="{{ Auth::check() ? Auth::user()->id : 0 }}" readonly required 
-                                   class="w-full border border-gray-300 rounded px-4 py-2">
-                        </div>
 
                         <div id="experience-container" class="space-y-6">
                             <div class="bg-gray-50 p-4 rounded shadow-md relative">
