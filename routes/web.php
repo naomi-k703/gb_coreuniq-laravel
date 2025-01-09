@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 });
 
-// **`layouts.feedback` に対応するルート**
+// **layouts.feedback に対応するルート**
 Route::get('/layouts/feedback', function () {
     return view('layouts.feedback');
 })->name('layouts.feedback');

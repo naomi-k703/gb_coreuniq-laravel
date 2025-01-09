@@ -1,226 +1,137 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>経験の棚卸し</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <style>
-        /* 全体のスタイル */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9fafb;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .user-info {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 16px;
-            color: #4b5563;
-        }
-        .nav-button {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 10px 15px;
-            text-decoration: none;
-            color: white;
-            background-color: #10b981; /* 緑色 */
-            border-radius: 8px;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
-        .nav-button:hover {
-            background-color: #059669;
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-        input:focus, select:focus, textarea:focus {
-            border-color: #10b981;
-            outline: none;
-        }
-        .dynamic-form {
-            margin-bottom: 15px;
-            padding: 15px;
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            position: relative;
-        }
-        .remove-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #1e40af;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .remove-btn:hover {
-            background: #1d4ed8;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #6b7280;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
-            font-weight: 500;
-        }
-        button:hover {
-            background-color: #4b5563;
-        }
-        .slider-container {
-            display: flex;
-            align-items: center;
-        }
-        .slider-container input[type="range"] {
-            flex-grow: 1;
-            margin: 0 10px;
-        }
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="user-info">
-        @if (Auth::check())
-            {{ Auth::user()->name }} さん
-        @else
-            ゲスト さん
-        @endif
-    </div>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('STEP１自己発見：経験の棚卸し') }}
+        </h2>
+    </x-slot>
 
-    <div class="container">
-        <!-- ページタイトル -->
-        <h1>STEP１自己発見：経験の棚卸し</h1>
+    <div class="py-12">
+        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="user-info text-gray-700 font-semibold">
+                            @if (Auth::check())
+                                {{ Auth::user()->name }} さん
+                            @else
+                                ゲスト さん
+                            @endif
+                        </div>
 
-        <!-- ナビゲーションボタン -->
-        <div class="nav-buttons">
-            <a href="/dashboard" class="nav-button">ダッシュボードに戻る</a>
-            <a href="/experiences/chart" class="nav-button">感情曲線を見る</a>
-            <a href="{{ route('experiences.index') }}" class="nav-button">経験一覧を見る</a>
-        </div>
-        
-        <!-- フォーム -->
-        <form method="POST" action="{{ route('experiences.store') }}">
-            @csrf
+                        <!-- ナビゲーションボタン -->
+                        <div class="nav-buttons flex gap-2">
+                            <a href="/dashboard" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">ダッシュボードに戻る</a>
+                            <a href="/experiences/chart" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">感情曲線を見る</a>
+                            <a href="{{ route('experiences.index') }}" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">経験一覧を見る</a>
+                        </div>
+                    </div>
 
-            <div class="dynamic-form">
-                <label for="user_id">ユーザーID：</label>
-                <input type="number" id="user_id" name="user_id" 
-                       value="{{ Auth::check() ? Auth::user()->id : 0 }}" readonly required>
-            </div>
+                    <!-- フォーム -->
+                    <form method="POST" action="{{ route('experiences.store') }}" class="space-y-6">
+                        @csrf
 
-            <div id="experience-container">
-                <div class="dynamic-form">
-                    <button type="button" class="remove-btn" onclick="removeExperience(this)">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+                        <div class="bg-gray-50 p-4 rounded shadow-md">
+                            <label for="user_id" class="block font-semibold text-gray-600">ユーザーID：</label>
+                            <input type="number" id="user_id" name="user_id" 
+                                   value="{{ Auth::check() ? Auth::user()->id : 0 }}" readonly required 
+                                   class="w-full border border-gray-300 rounded px-4 py-2">
+                        </div>
 
-                    <label for="age">年齢：</label>
-                    <input type="number" name="age[]" min="0" max="120" placeholder="例: 25" required>
+                        <div id="experience-container" class="space-y-6">
+                            <div class="bg-gray-50 p-4 rounded shadow-md relative">
+                                <button type="button" class="remove-btn absolute top-2 right-2 text-sm">削除</button>
 
-                    <label>経験タイプ：</label>
-                    <select name="experience_type[]" required>
-                        <option value="嬉しかった">😊 嬉しかった</option>
-                        <option value="嫌だった">😞 嫌だった</option>
-                    </select>
+                                <label for="age" class="block font-semibold text-gray-600">年齢：</label>
+                                <input type="number" name="age[]" min="0" max="120" placeholder="例: 25" required 
+                                       class="w-full border border-gray-300 rounded px-4 py-2">
 
-                    <label>経験の詳細（例: 内容や背景）：</label>
-                    <textarea name="experience_detail[]" placeholder="例: 学校で友達に助けられて嬉しかった経験" rows="3" required></textarea>
+                                <label class="block font-semibold text-gray-600">経験タイプ：</label>
+                                <select name="experience_type[]" required 
+                                        class="w-full border border-gray-300 rounded px-4 py-2">
+                                    <option value="嬉しかった">😊 嬉しかった</option>
+                                    <option value="嫌だった">😞 嫌だった</option>
+                                </select>
 
-                    <label>感情の強さ（1-5）：</label>
-                    <div class="slider-container">
-                        <span>1</span>
-                        <input type="range" name="emotion_strength[]" min="1" max="5" value="3" 
-                               oninput="this.nextElementSibling.innerText = this.value">
-                        <span>3</span>
+                                <label class="block font-semibold text-gray-600">経験の詳細（例: 内容や背景）：</label>
+                                <textarea name="experience_detail[]" placeholder="例: 学校で友達に助けられて嬉しかった経験" rows="3" required 
+                                          class="w-full border border-gray-300 rounded px-4 py-2"></textarea>
+
+                                <label class="block font-semibold text-gray-600">感情の強さ（1-5）：</label>
+                                <div class="slider-container flex items-center gap-2">
+                                    <span>1</span>
+                                    <input type="range" name="emotion_strength[]" min="1" max="5" value="3" 
+                                           oninput="this.nextElementSibling.innerText = this.value" 
+                                           class="flex-grow">
+                                    <span>3</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button-group flex justify-between items-center">
+                            <button type="button" onclick="addExperience()" 
+                                    class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">＋ フォームを追加</button>
+                            <button type="submit" 
+                                    class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">送信</button>
+                        </div>
+                    </form>
+
+                    <div class="next-button-group text-center mt-6">
+                        <a href="/feedback/index" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">次へ</a>
                     </div>
                 </div>
             </div>
-
-            <div class="button-group">
-                <button type="button" onclick="addExperience()">＋ フォームを追加</button>
-                <button type="submit">送信</button>
-            </div>
-        </form>
+        </div>
     </div>
 
+    <style>
+        .remove-btn {
+            background: #fde2e1;
+            color: #e63946;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #e63946;
+            color: #fff;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+
+    @push('scripts')
     <script>
         function addExperience() {
             const container = document.getElementById('experience-container');
             const form = document.createElement('div');
-            form.className = 'dynamic-form';
+            form.className = 'bg-gray-50 p-4 rounded shadow-md relative';
             form.innerHTML = `
-                <button type="button" class="remove-btn" onclick="removeExperience(this)">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-
-                <label for="age">年齢：</label>
-                <input type="number" name="age[]" min="0" max="120" placeholder="例: 25" required>
-
-                <label>経験タイプ：</label>
-                <select name="experience_type[]" required>
+                <button type="button" class="remove-btn absolute top-2 right-2 text-sm">削除</button>
+                <label for="age" class="block font-semibold text-gray-600">年齢：</label>
+                <input type="number" name="age[]" min="0" max="120" placeholder="例: 25" required 
+                       class="w-full border border-gray-300 rounded px-4 py-2">
+                <label class="block font-semibold text-gray-600">経験タイプ：</label>
+                <select name="experience_type[]" required 
+                        class="w-full border border-gray-300 rounded px-4 py-2">
                     <option value="嬉しかった">😊 嬉しかった</option>
                     <option value="嫌だった">😞 嫌だった</option>
                 </select>
-
-                <label>経験の詳細（例: 内容や背景）：</label>
-                <textarea name="experience_detail[]" placeholder="例: 学校で友達に助けられて嬉しかった経験" rows="3" required></textarea>
-
-                <label>感情の強さ（1-5）：</label>
-                <div class="slider-container">
+                <label class="block font-semibold text-gray-600">経験の詳細（例: 内容や背景）：</label>
+                <textarea name="experience_detail[]" placeholder="例: 学校で友達に助けられて嬉しかった経験" rows="3" required 
+                          class="w-full border border-gray-300 rounded px-4 py-2"></textarea>
+                <label class="block font-semibold text-gray-600">感情の強さ（1-5）：</label>
+                <div class="slider-container flex items-center gap-2">
                     <span>1</span>
                     <input type="range" name="emotion_strength[]" min="1" max="5" value="3" 
-                           oninput="this.nextElementSibling.innerText = this.value">
+                           oninput="this.nextElementSibling.innerText = this.value" 
+                           class="flex-grow">
                     <span>3</span>
                 </div>
             `;
@@ -231,5 +142,5 @@
             button.parentElement.remove();
         }
     </script>
-</body>
-</html>
+    @endpush
+</x-app-layout>
