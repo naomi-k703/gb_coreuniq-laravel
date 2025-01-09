@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
-            {{ __('自己選択とフィードバック (Step 2)') }}
+            {{ __('（Step2）フィードバックと自己選択') }}
         </h2>
     </x-slot>
 
     <div class="container mx-auto px-4 py-12">
-        <h1 class="text-3xl font-bold text-center mb-8">周囲からの強みを聞いてみましょう</h1>
+        <h1 class="text-3xl font-bold text-center mb-12">周囲から自分の強みを聞いてみましょう！</h1>
 
         <!-- フィードバック依頼 -->
         <div class="bg-white shadow rounded-lg p-6 max-w-xl mx-auto">

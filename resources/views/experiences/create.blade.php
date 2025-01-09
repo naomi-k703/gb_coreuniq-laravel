@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('STEP１自己発見：経験の棚卸し') }}
+            {{ __('（Step1）経験の棚卸しと自己発見') }}
         </h2>
     </x-slot>
 
