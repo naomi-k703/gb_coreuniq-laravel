@@ -81,7 +81,7 @@
                         キャンセル
                     </button>
                     <button id="confirmButton" 
-                        class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-blue-600 focus:bg-blue-700 transition">
+                        class="bg-blue-500 text-gray px-4 py-2 rounded-lg shadow-sm hover:bg-blue-600 focus:bg-blue-700 transition">
                         送信する
                     </button>
                 </div>
