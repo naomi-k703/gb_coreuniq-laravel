@@ -79,7 +79,7 @@
                     </form>
 
                     <div class="next-button-group text-center mt-6">
-                        <a href="/feedback/index" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">次へ</a>
+                        <a href="{{ route('feedback.index') }}" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">次へ</a>
                     </div>
                 </div>
             </div>

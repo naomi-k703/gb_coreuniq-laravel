@@ -54,11 +54,10 @@
 
     <div class="flex justify-between mt-6 max-w-xl mx-auto">
         <!-- 戻るボタン -->
-        <a href="/experiences/create" 
+        <a href="{{ route('experiences.create') }}"
         class="bg-gray-100 text-gray-700 px-4 py-2 rounded shadow hover:bg-gray-200 focus:bg-gray-300 transition transform hover:scale-105">
         戻る
     </a>
-    
     
         <!-- 次へボタン -->
         <a href="{{ route('dashboard') }}" 
