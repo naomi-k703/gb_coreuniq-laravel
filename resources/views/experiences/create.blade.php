@@ -30,8 +30,8 @@
                     
                         <!-- ナビゲーションボタン -->
                     <div class="nav-buttons flex gap-2 justify-end">
-                        <a href="/dashboard" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">ダッシュボードに戻る</a>
-                        <a href="/experiences/chart" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">感情曲線を見る</a>
+                        <a href="{{ route('dashboard') }}" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">ダッシュボードに戻る</a>
+                        <a href="{{ route('experiences.chart') }}" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">感情曲線を見る</a>
                         <a href="{{ route('experiences.index') }}" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">経験一覧を見る</a>
                     </div>
                     
