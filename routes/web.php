@@ -18,17 +18,19 @@ Route::get('/dashboard', [ExperienceController::class, 'dashboard'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-// 経験データCRUDルート
-Route::group([], function () {
+
+// 経験データCRUDルート（認証が必要）
+Route::middleware(['auth'])->group(function () {
     Route::get('/test-create', [ExperienceController::class, 'testCreate']);
     Route::get('/experiences/index', [ExperienceController::class, 'index'])->name('experiences.index');
     Route::get('/experiences/create', [ExperienceController::class, 'create'])->name('experiences.create');
-    Route::post('/experiences', [ExperienceController::class, 'store'])->name('experiences.store');
+    Route::post('/experiences/store', [ExperienceController::class, 'store'])->name('experiences.store');
     Route::get('/experiences/{id}/edit', [ExperienceController::class, 'edit'])->name('experiences.edit');
     Route::put('/experiences/{id}', [ExperienceController::class, 'update'])->name('experiences.update');
     Route::delete('/experiences/{id}', [ExperienceController::class, 'destroy'])->name('experiences.destroy');
     Route::get('/experiences/chart', [ExperienceController::class, 'chart'])->name('experiences.chart');
 });
+
 
 // フィードバック関連のルート
 Route::middleware(['auth'])->group(function () {
@@ -77,4 +79,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Breeze の認証ルート
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+

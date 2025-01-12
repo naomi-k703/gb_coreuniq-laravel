@@ -105,8 +105,8 @@
         <div class="bg-white rounded-lg shadow p-6">
             <h3 class="text-lg font-semibold text-gray-800">ヘルプ</h3>
             <ul class="list-disc pl-6 text-gray-800 mt-4">
-                <li><a href="/help" class="text-blue-500 hover:text-blue-600">システムの使い方</a></li>
-                <li><a href="/help/faq" class="text-blue-500 hover:text-blue-600">よくある質問</a></li>
+                <li><a href="help" class="text-blue-500 hover:text-blue-600">システムの使い方</a></li>
+                <li><a href="help.faq" class="text-blue-500 hover:text-blue-600">よくある質問</a></li>
             </ul>
         </div>
     </div>
