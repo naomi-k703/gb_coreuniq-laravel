@@ -59,6 +59,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// 設定ページのルート
+Route::middleware(['auth'])->group(function () {
+    Route::get('/settings', function () {
+        return view('settings');
+    })->name('settings');
+});
+
+
 // その他のルート
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
