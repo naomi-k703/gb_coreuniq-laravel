@@ -31,7 +31,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/experiences/chart', [ExperienceController::class, 'chart'])->name('experiences.chart');
 });
 
-
 // フィードバック関連のルート
 Route::middleware(['auth'])->group(function () {
     // フィードバック一覧

@@ -73,15 +73,27 @@ class ExperienceController extends Controller
     */
 
     // データ保存処理
+    // foreach ($request->experience_type as $index => $type) {
+    //     Experience::create([
+    //         'user_id' => Auth::id(), // ログイン中のユーザーIDを自動設定
+    //         'age' => $request->age[$index], // 年齢
+    //         'experience_type' => $type, // 経験タイプ
+    //         'experience_detail' => $request->experience_detail[$index], // 経験詳細
+    //         'emotion_strength' => $request->emotion_strength[$index], // 感情強度
+    //     ]);
+    // }
+
+    // データ保存処理
     foreach ($request->experience_type as $index => $type) {
         Experience::create([
-            'user_id' => Auth::id(), // ログイン中のユーザーIDを自動設定
-            'age' => $request->age[$index], // 年齢
-            'experience_type' => $type, // 経験タイプ
-            'experience_detail' => $request->experience_detail[$index], // 経験詳細
-            'emotion_strength' => $request->emotion_strength[$index], // 感情強度
+            'user_id' => Auth::id(),
+            'age' => $request->age[$index] ?? null, // デフォルト値: null
+            'experience_type' => $type,
+            'experience_detail' => $request->experience_detail[$index] ?? '', // デフォルト値: 空文字
+            'emotion_strength' => $request->emotion_strength[$index] ?? 1, // デフォルト値: 1
         ]);
     }
+    
 
     return redirect()->route('experiences.index')->with('success', '経験が保存されました！');
 }
