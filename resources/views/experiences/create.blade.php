@@ -60,7 +60,7 @@
                                 <textarea id="experience_detail_1" name="experience_detail[]" placeholder="例: 学校で友達に助けられて嬉しかった経験" rows="3" required 
                                           class="w-full border border-gray-300 rounded px-4 py-2"></textarea>
 
-                                <label for="emotion_strength_1" class="block font-semibold text-gray-600">感情の強さ（1-5）：</label>
+                                <label for="emotion_strength_1" class="block font-semibold text-gray-600">感情のレベル（1-5）：</label>
                                 <div class="slider-container flex items-center gap-2">
                                     <span>1</span>
                                     <input type="range" id="emotion_strength_1" name="emotion_strength[]" min="1" max="5" value="3" 
