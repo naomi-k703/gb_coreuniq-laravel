@@ -125,7 +125,7 @@
     <!-- ボタンを右上に配置 -->
     <div class="button-group">
         <a href="{{ route('experiences.create') }}" class="button">新しい経験を作成</a>
-        <a href="/experiences/chart" class="btn-primary">感情曲線を見る</a>
+        <a href="{{ route('experiences.chart') }}" class="btn-primary">感情曲線を見る</a>
         <a href="{{ route('dashboard') }}" class="btn-primary">マイページ</a>
     </div>
 
