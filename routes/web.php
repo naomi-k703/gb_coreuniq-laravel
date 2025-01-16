@@ -18,6 +18,18 @@ Route::get('/dashboard', [ExperienceController::class, 'dashboard'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// Core Uniq関連のルート
+use App\Http\Controllers\WelcomeController;
+
+// Core Uniqの紹介ページ
+Route::get('/coreuniq-intro', [WelcomeController::class, 'index'])->name('coreuniqIntro');
+
+// Core Uniqの使い方ページ
+Route::get('/how-to-use', [WelcomeController::class, 'howToUse'])->name('howToUse');
+
+// Core Uniqの体験紹介ページ
+Route::get('/experience-intro', [WelcomeController::class, 'experienceIntro'])->name('experienceIntro');
+
 
 // 経験データCRUDルート（認証が必要）
 Route::middleware(['auth'])->group(function () {

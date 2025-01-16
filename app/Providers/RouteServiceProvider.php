@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/coreuniq-intro'; // リダイレクト先を変更（ここを変更した1/16にね）
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
